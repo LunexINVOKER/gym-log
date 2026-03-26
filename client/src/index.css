@@ -1,0 +1,325 @@
+/* ── Reset & Base ─────────────────────────────────────────── */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: #0f0f0f;
+  color: #f0f0f0;
+  min-height: 100vh;
+}
+
+/* ── Layout Cards ─────────────────────────────────────────── */
+.landing,
+.form-page,
+.dashboard,
+.workout-detail {
+  max-width: 680px;
+  margin: 60px auto;
+  padding: 36px;
+  background: #1a1a1a;
+  border-radius: 16px;
+  border: 1px solid #2a2a2a;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+/* ── Typography ───────────────────────────────────────────── */
+h1 {
+  font-size: 2.8rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #ff6b35, #f7c59f);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 12px;
+}
+
+h2 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 20px;
+}
+
+h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #aaaaaa;
+  margin: 24px 0 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+p {
+  color: #888;
+  margin-bottom: 16px;
+  line-height: 1.6;
+}
+
+/* ── Inputs ───────────────────────────────────────────────── */
+input {
+  display: block;
+  width: 100%;
+  padding: 12px 16px;
+  margin-bottom: 12px;
+  background: #242424;
+  border: 1px solid #333;
+  border-radius: 10px;
+  color: #f0f0f0;
+  font-size: 0.95rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  outline: none;
+}
+
+input::placeholder {
+  color: #555;
+}
+
+input:focus {
+  border-color: #ff6b35;
+  box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.15);
+}
+
+/* ── Buttons ──────────────────────────────────────────────── */
+button {
+  padding: 10px 20px;
+  margin-right: 8px;
+  margin-bottom: 8px;
+  border: none;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+/* Primary button */
+button[type="submit"],
+button.primary {
+  background: linear-gradient(135deg, #ff6b35, #e85d26);
+  color: white;
+}
+
+button[type="submit"]:hover,
+button.primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(255, 107, 53, 0.35);
+}
+
+/* Default button */
+button:not([type="submit"]):not(.primary) {
+  background: #2a2a2a;
+  color: #ccc;
+  border: 1px solid #333;
+}
+
+button:not([type="submit"]):not(.primary):hover {
+  background: #333;
+  color: #fff;
+}
+
+/* Delete button */
+button.delete {
+  background: transparent;
+  color: #e05252;
+  border: 1px solid #e05252;
+}
+
+button.delete:hover {
+  background: #e05252;
+  color: white;
+}
+
+/* ── Links ────────────────────────────────────────────────── */
+a {
+  color: #ff6b35;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* ── Error ────────────────────────────────────────────────── */
+.error {
+  color: #e05252;
+  background: rgba(224, 82, 82, 0.1);
+  border: 1px solid rgba(224, 82, 82, 0.3);
+  border-radius: 8px;
+  padding: 10px 14px;
+  margin-bottom: 14px;
+  font-size: 0.9rem;
+}
+
+/* ── Landing ──────────────────────────────────────────────── */
+.landing {
+  text-align: center;
+  padding: 60px 36px;
+}
+
+.landing p {
+  font-size: 1.1rem;
+  color: #888;
+  margin-bottom: 32px;
+}
+
+.landing div {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.landing button {
+  padding: 12px 28px;
+  font-size: 1rem;
+}
+
+/* ── Dashboard header ─────────────────────────────────────── */
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 28px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #2a2a2a;
+}
+
+/* ── New workout form ─────────────────────────────────────── */
+.new-workout-form {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 28px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.new-workout-form input {
+  margin-bottom: 0;
+  flex: 1;
+  min-width: 140px;
+}
+
+/* ── Workout list ─────────────────────────────────────────── */
+.workout-list {
+  list-style: none;
+}
+
+.workout-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 16px;
+  margin-bottom: 8px;
+  background: #222;
+  border: 1px solid #2a2a2a;
+  border-radius: 12px;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.workout-item:hover {
+  background: #262626;
+  border-color: #ff6b35;
+}
+
+.workout-item span {
+  cursor: pointer;
+  flex: 1;
+}
+
+.workout-item span strong {
+  display: block;
+  font-size: 1rem;
+  color: #f0f0f0;
+  margin-bottom: 2px;
+}
+
+.workout-item span small,
+.workout-item span:not(strong) {
+  color: #666;
+  font-size: 0.85rem;
+}
+
+/* ── Workout detail header ────────────────────────────────── */
+.workout-header {
+  margin-bottom: 24px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #2a2a2a;
+}
+
+.workout-header h2 {
+  margin-bottom: 4px;
+}
+
+.workout-header p {
+  color: #666;
+  font-size: 0.9rem;
+  margin-bottom: 14px;
+}
+
+/* ── Exercise list ────────────────────────────────────────── */
+.exercise-list {
+  list-style: none;
+  margin-bottom: 24px;
+}
+
+.exercise-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  margin-bottom: 8px;
+  background: #222;
+  border: 1px solid #2a2a2a;
+  border-radius: 10px;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.exercise-item span strong {
+  color: #f0f0f0;
+}
+
+.exercise-item span {
+  flex: 1;
+  color: #888;
+  font-size: 0.9rem;
+}
+
+/* ── Exercise form ────────────────────────────────────────── */
+.exercise-form {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 10px;
+  align-items: start;
+}
+
+.exercise-form input {
+  margin-bottom: 0;
+}
+
+.exercise-form button {
+  grid-column: 1 / -1;
+}
+
+/* ── Back button ──────────────────────────────────────────── */
+.workout-detail > button:first-child {
+  margin-bottom: 20px;
+  background: transparent;
+  color: #ff6b35;
+  border: 1px solid #ff6b35;
+  padding: 8px 16px;
+}
+
+.workout-detail > button:first-child:hover {
+  background: #ff6b35;
+  color: white;
+}
+
+/* ── Loading ──────────────────────────────────────────────── */
+p:has(+ *) {
+  color: #666;
+}
