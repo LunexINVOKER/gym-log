@@ -1,3 +1,4 @@
+import ExerciseGuide from "../components/ExerciseGuide";
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import {
@@ -117,6 +118,7 @@ export default function WorkoutDetail({ token }) {
               <>
                 <span>
                   <strong>{ex.name}</strong> — {ex.sets} sets × {ex.reps} reps @ {ex.weight} kg
+                  <ExerciseGuide exerciseName={ex.name} />
                 </span>
                 <button onClick={() => setEditExercise(ex)}>Edit</button>
                 <button onClick={() => handleDeleteExercise(ex.id)}>Delete</button>
