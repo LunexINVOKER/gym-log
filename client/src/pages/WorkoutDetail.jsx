@@ -74,7 +74,11 @@ export default function WorkoutDetail({ token }) {
     setEditExercise(null);
     loadWorkout();
   }
-
+  
+  async function handleDeleteExercise(eid) {
+    await deleteExercise(token, id, eid);
+    loadWorkout();
+  }
 
 
   if (!workout) return <p>Loading...</p>;
