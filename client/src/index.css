@@ -323,3 +323,46 @@ a:hover {
 p:has(+ *) {
   color: #666;
 }
+/* ── Suggests ──────────────────────────────────────────────── */
+.suggestions-list {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: #2a2a2a;
+  border: 1px solid #444;
+  border-radius: 8px;
+  list-style: none;
+  z-index: 10;
+  margin-top: 4px;
+}
+
+.suggestion-item {
+  padding: 10px 14px;
+  cursor: pointer;
+  color: #f0f0f0;
+}
+
+.suggestion-item:hover {
+  background: #ff6b35;
+  color: white;
+}
+/* ── Timer ──────────────────────────────────────────────── */
+.timer-custom {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.timer-custom input {
+  width: 120px;
+  text-align: center;
+  margin-bottom: 0;
+}
+
+/* Зачёркнутое упражнение когда отмечено */
+.exercise-done span {
+  text-decoration: line-through;
+  opacity: 0.5;
+}

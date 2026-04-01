@@ -1,3 +1,5 @@
+import RestTimer from "../components/RestTimer";
+import ExerciseSuggestions from "../components/ExerciseSuggestions";
 import ExerciseGuide from "../components/ExerciseGuide";
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
@@ -14,13 +16,14 @@ export default function WorkoutDetail({ token }) {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const [workout, setWorkout] = useState(null);
-  const [editing, setEditing] = useState(false);
-  const [editName, setEditName] = useState("");
-  const [editDate, setEditDate] = useState("");
-  const [form, setForm] = useState({ name: "", sets: "", reps: "", weight: "" });
-  const [editExercise, setEditExercise] = useState(null); // { id, name, sets, reps, weight }
-  const [error, setError] = useState(null);
+  const [completed, setCompleted]   = useState(new Set());
+  const [workout, setWorkout]       = useState(null);
+  const [editing, setEditing]       = useState(false);
+  const [editName, setEditName]     = useState("");
+  const [editDate, setEditDate]     = useState("");
+  const [form, setForm]             = useState({ name: "", sets: "", reps: "", weight: "" });
+  const [editExercise, setEditExercise] = useState(null);
+  const [error, setError]           = useState(null);
 
   useEffect(() => {
     loadWorkout();
@@ -74,12 +77,22 @@ export default function WorkoutDetail({ token }) {
     setEditExercise(null);
     loadWorkout();
   }
-  
+
   async function handleDeleteExercise(eid) {
     await deleteExercise(token, id, eid);
     loadWorkout();
   }
 
+  // Toggle exercise as done/undone — uses a Set to track completed exercise ids
+  function toggleComplete(eid) {
+    setCompleted(prev => {
+      const next = new Set(prev);       // copy the existing Set
+      next.has(eid)
+        ? next.delete(eid)              // if already done — unmark it
+        : next.add(eid);                // if not done — mark it
+      return next;
+    });
+  }
 
   if (!workout) return <p>Loading...</p>;
 
@@ -108,7 +121,11 @@ export default function WorkoutDetail({ token }) {
 
       <ul className="exercise-list">
         {workout.exercises.map(ex => (
-          <li key={ex.id} className="exercise-item">
+          // exercise-done class adds strikethrough when completed
+          <li
+            key={ex.id}
+            className={`exercise-item ${completed.has(ex.id) ? "exercise-done" : ""}`}
+          >
             {editExercise?.id === ex.id ? (
               <form onSubmit={handleUpdateExercise}>
                 <input value={editExercise.name}   onChange={e => setEditExercise({ ...editExercise, name: e.target.value })} />
@@ -121,9 +138,13 @@ export default function WorkoutDetail({ token }) {
             ) : (
               <>
                 <span>
-                  <strong>{ex.name}</strong> — {ex.sets} sets × {ex.reps} reps @ {ex.weight} kg
+                  <strong>{ex.name}</strong> — {ex.sets} sets × {ex.reps} reps @ {ex.weight} lbs
                   <ExerciseGuide exerciseName={ex.name} />
                 </span>
+                {/* Toggle button — shows ✅ if done, ○ if not */}
+                <button type="button" onClick={() => toggleComplete(ex.id)}>
+                  {completed.has(ex.id) ? "✅" : "○"}
+                </button>
                 <button onClick={() => setEditExercise(ex)}>Edit</button>
                 <button onClick={() => handleDeleteExercise(ex.id)}>Delete</button>
               </>
@@ -134,12 +155,16 @@ export default function WorkoutDetail({ token }) {
 
       <h3>Add Exercise</h3>
       <form onSubmit={handleAddExercise} className="exercise-form">
-        <input
-          placeholder="Exercise name"
-          value={form.name}
-          onChange={e => setForm({ ...form, name: e.target.value })}
-          required
-        />
+        <div style={{ position: "relative" }}>
+          <input
+            value={form.name}
+            onChange={e => setForm({ ...form, name: e.target.value })}
+          />
+          <ExerciseSuggestions
+            value={form.name}
+            onSelect={name => setForm({ ...form, name })}
+          />
+        </div>
         <input
           type="number" placeholder="Sets"
           value={form.sets}
@@ -153,14 +178,14 @@ export default function WorkoutDetail({ token }) {
           required
         />
         <input
-          type="number" placeholder="Weight (kg)"
+          type="number" placeholder="Weight (lbs)"
           value={form.weight}
           onChange={e => setForm({ ...form, weight: e.target.value })}
           required
         />
         <button type="submit">Add Exercise</button>
       </form>
+      <RestTimer />
     </div>
   );
 }
-

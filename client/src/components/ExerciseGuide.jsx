@@ -1,10 +1,14 @@
 const GUIDES = {
-  "bench press": "https://www.youtube.com/watch?v=rT7DgCr-3pg",
-  "squat":       "https://www.youtube.com/watch?v=ultWZbUMPL8",
-  "deadlift":    "https://www.youtube.com/watch?v=op9kVnSso6Q",
-  "pull-up":     "https://www.youtube.com/watch?v=eGo4IYlbE5g",
-  "incline db":  "https://www.youtube.com/watch?v=8iPEnn-ltC8",
-  "leg press":   "https://www.youtube.com/watch?v=IZxyjW7MPJQ",
+  "bench press": "https://en.wikipedia.org/wiki/Bench_press",
+  "squat":       "https://en.wikipedia.org/wiki/Squat_(exercise)",
+  "deadlift":    "https://en.wikipedia.org/wiki/Deadlift",
+  "pull-up":     "https://en.wikipedia.org/wiki/Pull-up",
+  "incline db":  "https://musclewiki.com/exercise/dumbbell-incline-bench-press",
+  "leg press":   "https://en.wikipedia.org/wiki/Leg_press",  
+  "Overhead Press": "https://en.wikipedia.org/wiki/Overhead_press",
+  "Barbell Row": "https://en.wikipedia.org/wiki/Bent-over_row",
+  "Bicep Curl": "https://en.wikipedia.org/wiki/Bicep_curl",
+  "Tricep Pushdown": "https://en.wikipedia.org/wiki/Push-down_(exercise)",
 };
 
 export default function ExerciseGuide({ exerciseName }) {
