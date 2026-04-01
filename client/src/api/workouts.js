@@ -1,4 +1,5 @@
-const BASE = "/workouts";
+const API = import.meta.env.VITE_API_URL || "";
+const BASE = `${API}/workouts`;
 
 function authHeaders(token) {
   return {
