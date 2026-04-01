@@ -25,3 +25,8 @@ app.use((err, req, res, _next) => {
 });
 
 module.exports = app;
+
+app.use(cors({
+  origin: "https://gym-log-sigma.vercel.app",
+  credentials: true,
+}));
